@@ -4,7 +4,7 @@ exports.allmodes = [{
     modeName: "Javascript(JSON)"
 }, {
     filename: ".css",
-    mode: "CSS",
+    mode: "css",
     modeName: "CSS"
 }, {
     filename: "js",
@@ -12,7 +12,7 @@ exports.allmodes = [{
     modeName: "Javascript"
 }, {
     filename: ".html",
-    mode: "html",
+    mode: "htmlmixed",
     modeName: "HTML"
 }, {
     filename: ".rb",
@@ -22,11 +22,7 @@ exports.allmodes = [{
     filename: ".py",
     mode: "python",
     modeName: "Python"
-}, {
-    filename: ".c",
-    mode: "c",
-    modeName: "C"
-}, {
+},{
     filename: ".cpp",
     mode: "cpp",
     modeName: "C++"

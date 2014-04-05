@@ -1,6 +1,5 @@
 var newButton, openButton, saveButton;
 var editor;
-var menu;
 var fileEntry;
 var hasWriteAccess;
 
@@ -54,6 +53,7 @@ function readFileIntoEditor(theFileEntry) {
 
         handleDocumentChange(theFileEntry);
         editor.setValue(String(data));
+        fileEntry = theFileEntry;
     });
 }
 
@@ -66,17 +66,21 @@ function writeEditorToFile(theFileEntry) {
         }
 
         handleDocumentChange(theFileEntry);
+        document.getElementById("filestatus").innerHTML = "Save Completed";
         console.log("Write completed.");
+      
     });
 }
 
 var onChosenFileToOpen = function(theFileEntry) {
     setFile(theFileEntry, false);
+    console.log(theFileEntry);
     readFileIntoEditor(theFileEntry);
 };
 
 var onChosenFileToSave = function(theFileEntry) {
     setFile(theFileEntry, true);
+    console.log(theFileEntry);
     writeEditorToFile(theFileEntry);
 };
 
@@ -103,38 +107,8 @@ function handleSaveButton() {
     }
 }
 
-function initContextMenu() {
-    menu = new gui.Menu();
-    menu.append(new gui.MenuItem({
-        label: 'Copy',
-        click: function() {
-            clipboard.set(editor.getSelection());
-        }
-    }));
-    menu.append(new gui.MenuItem({
-        label: 'Cut',
-        click: function() {
-            clipboard.set(editor.getSelection());
-            editor.replaceSelection('');
-        }
-    }));
-    menu.append(new gui.MenuItem({
-        label: 'Paste',
-        click: function() {
-            editor.replaceSelection(clipboard.get());
-        }
-    }));
-
-    document.getElementById("editor").addEventListener('contextmenu',
-        function(ev) {
-            ev.preventDefault();
-            menu.popup(ev.x, ev.y);
-            return false;
-        });
-}
-
-
-function ButtonEvent() {
+onload = function() {
+  
     newButton = document.getElementById("new");
     openButton = document.getElementById("open");
     saveButton = document.getElementById("save");
@@ -148,19 +122,10 @@ function ButtonEvent() {
     });
     $("#openFile").change(function(evt) {
         onChosenFileToOpen($(this).val());
-    });
-}
-onload = function() {
-    initContextMenu();
-    ButtonEvent();
-    "editor"
+    });    
     editor = CodeMirror(
         document.getElementById("editor"), {
             lineNumbers: true,
-            mode: {
-                name: "javascript",
-                json: true
-            },
             keyMap: "sublime",
             autoCloseBrackets: true,
             matchBrackets: true,
@@ -183,10 +148,12 @@ onload = function() {
                 },
                 "Ctrl-S": function(instance) {
                     handleSaveButton()
+                },
+                "Cmd-Shift-P": function(instance) {
+                   console.log("hello".green)
                 }
             }
         });
-    console.log(editor.modeInfo);
     newFile();
     onresize();
 
@@ -196,7 +163,7 @@ onload = function() {
 onresize = function() {
     var container = document.getElementById("editor");
     var containerWidth = container.offsetWidth;
-    var containerHeight = container.offsetHeight - 30;
+    var containerHeight = container.offsetHeight - 32;
     console.log(containerHeight);
 
     var scrollerElement = editor.getScrollerElement();
