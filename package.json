@@ -6,8 +6,7 @@
   "keywords": [ "demo", "node-webkit" ],
   "window": {
     "title": "nw-demo",
-    "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
     "frame": false,
     "width": 800,
     "height": 500,

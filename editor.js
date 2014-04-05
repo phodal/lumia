@@ -85,7 +85,7 @@ function handleNewButton() {
   } else {
     var x = window.screenX + 10;
     var y = window.screenY + 10;
-    window.open('main.html', '_blank', 'screenX=' + x + ',screenY=' + y);
+    window.open('index.html', '_blank', 'screenX=' + x + ',screenY=' + y);
   }
 }
 
@@ -156,6 +156,10 @@ onload = function() {
       mode: {name: "javascript", json: true },
       lineNumbers: true,
       extraKeys: {
+        "Cmd-N": function(instance) { handleNewButton() },
+        "Ctrl-N": function(instance) { handleNewButton() },
+        "Cmd-O": function(instance) { handleOpenButton() },
+        "Ctrl-O": function(instance) { handleOpenButton() },
         "Cmd-S": function(instance) { handleSaveButton() },
         "Ctrl-S": function(instance) { handleSaveButton() },
       }
