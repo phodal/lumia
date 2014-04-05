@@ -3,7 +3,7 @@
 <head>
     <title>untitled</title>
     <link rel="stylesheet" href="./style/style.css">
-
+    <link rel="stylesheet" href="./style/styles.css">
     <script src="lib/zepto.min.js"></script>
     <script src="editor.js"></script>
     <script src="cm/lib/codemirror.js"></script>
@@ -22,6 +22,11 @@
             <div class="vertical">
                 <div class="panes">
                     <div class="pane active">
+                        <div style="info">
+                            <button id="new">New</button>
+                            <button id="open">Open</button>
+                            <button id="save">Save</button>
+                        </div>
                         <ul tabindex="-1" class="list-inline tab-bar inset-panel">
                             <li class="tab sortable active">
                                 <div class="title" id="title">untitled</div>
@@ -29,7 +34,7 @@
                             </li>
                         </ul>
                         <div class="item-views">
-                            <div class=" editor-colors soft-wrap">
+                            <div class=" editor-colors soft-wrap" style="min-height:1800px">
                                 <div class="gutter">
                                     <div class="line-numbers">
                                     </div>
@@ -38,41 +43,10 @@
                                     <div class="overlayer">
                                         <div class="cursor idle"></div>
                                     </div>
-                                    <div class="buttons">
-                                        <button id="new">New</button>
-                                        <button id="open">Open</button>
-                                        <button id="save">Save</button>
-                                    </div>
+
                                 </div>
                                 <div id="editor"></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="ColorPicker" class="ColorPicker">
-                    <div id="ColorPicker-loader" class="ColorPicker-loader">
-                        <div class="ColorPicker-loaderDot"></div>
-                        <div class="ColorPicker-loaderDot"></div>
-                        <div class="ColorPicker-loaderDot"></div>
-                    </div>
-                    <div id="ColorPicker-color" class="ColorPicker-color">
-                        <div id="ColorPicker-value" class="ColorPicker-value"></div>
-                    </div>
-                    <div id="ColorPicker-initialWrapper" class="ColorPicker-initialWrapper">
-                        <div id="ColorPicker-initial" class="ColorPicker-initial"></div>
-                    </div>
-                    <div id="ColorPicker-picker" class="ColorPicker-picker">
-                        <div id="ColorPicker-saturationSelectorWrapper" class="ColorPicker-saturationSelectorWrapper">
-                            <div id="ColorPicker-saturationSelection" class="ColorPicker-saturationSelection"></div>
-                            <canvas id="ColorPicker-saturationSelector" class="ColorPicker-saturationSelector" width="180px" height="180px"></canvas>
-                        </div>
-                        <div id="ColorPicker-alphaSelectorWrapper" class="ColorPicker-alphaSelectorWrapper">
-                            <div id="ColorPicker-alphaSelection" class="ColorPicker-alphaSelection"></div>
-                            <canvas id="ColorPicker-alphaSelector" class="ColorPicker-alphaSelector" width="20px" height="180px"></canvas>
-                        </div>
-                        <div id="ColorPicker-hueSelectorWrapper" class="ColorPicker-hueSelectorWrapper">
-                            <div id="ColorPicker-hueSelection" class="ColorPicker-hueSelection"></div>
-                            <canvas id="ColorPicker-hueSelector" class="ColorPicker-hueSelector" width="20px" height="180px"></canvas>
                         </div>
                     </div>
                 </div>
@@ -89,6 +63,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <input style="display:none;" id="openFile" type="file" />
         <input style="display:none;" id="saveFile" type="file" nwsaveas />

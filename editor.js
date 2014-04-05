@@ -5,6 +5,7 @@ var fileEntry;
 var hasWriteAccess;
 
 var gui = require("nw.gui");
+
 var fs = require("fs");
 var clipboard = gui.Clipboard.get();
 
@@ -167,9 +168,9 @@ onload = function() {
 };
 
 onresize = function() {
-  var container = document.getElementById('editor');
+  var container = document.getElementsByTagName('body')[0];
   var containerWidth = container.offsetWidth;
-  var containerHeight = container.offsetHeight;
+  var containerHeight = container.offsetWidth;
 
   var scrollerElement = editor.getScrollerElement();
   scrollerElement.style.width = containerWidth + 'px';
