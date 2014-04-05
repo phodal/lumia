@@ -1,4 +1,24 @@
 {
+  "main": "index.html",
   "name": "nw-demo",
-  "main": "index.html"
+  "description": "demo app of node-webkit",
+  "version": "0.1.0",
+  "keywords": [ "demo", "node-webkit" ],
+  "window": {
+    "title": "nw-demo",
+    "icon": "link.png",
+    "toolbar": true,
+    "frame": false,
+    "width": 800,
+    "height": 500,
+    "position": "mouse",
+    "min_width": 800,
+    "min_height": 500
+  },
+  "dependencies": {
+    "underscore": "~1.4.4"
+  },
+  "webkit": {
+    "plugin": true
+  }
 }
