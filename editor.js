@@ -7,6 +7,8 @@ var hasWriteAccess;
 var gui = require("nw.gui");
 
 var fs = require("fs");
+var Backbone = require('backbone');
+var _ = require("underscore");
 var clipboard = gui.Clipboard.get();
 
 function handleDocumentChange(title) {
