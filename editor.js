@@ -17,7 +17,10 @@ function handleDocumentChange(title) {
     document.getElementById("title").innerHTML = title;
     document.title = title;
     if (title.match(/.json$/)) {
-      mode = {name: "javascript", json: true};
+      mode = {
+        name: "javascript",
+        json: true
+      };
       modeName = "JavaScript (JSON)";
     } else if (title.match(/.html$/)) {
       mode = "htmlmixed";
@@ -45,7 +48,7 @@ function setFile(theFileEntry, isWritable) {
 }
 
 function readFileIntoEditor(theFileEntry) {
-  fs.readFile(theFileEntry, function (err, data) {
+  fs.readFile(theFileEntry, function(err, data) {
     if (err) {
       console.log("Read failed: " + err);
     }
@@ -57,7 +60,7 @@ function readFileIntoEditor(theFileEntry) {
 
 function writeEditorToFile(theFileEntry) {
   var str = editor.getValue();
-  fs.writeFile(theFileEntry, editor.getValue(), function (err) {
+  fs.writeFile(theFileEntry, editor.getValue(), function(err) {
     if (err) {
       console.log("Write failed: " + err);
       return;
@@ -124,11 +127,11 @@ function initContextMenu() {
   }));
 
   document.getElementById("editor").addEventListener('contextmenu',
-                                                     function(ev) { 
-    ev.preventDefault();
-    menu.popup(ev.x, ev.y);
-    return false;
-  });
+    function(ev) {
+      ev.preventDefault();
+      menu.popup(ev.x, ev.y);
+      return false;
+    });
 }
 
 
@@ -151,10 +154,13 @@ onload = function() {
   });
 
   editor = CodeMirror(
-    document.getElementById("editor"),
-    {
-      mode: {name: "javascript", json: true },
+    document.getElementById("editor"), {
       lineNumbers: true,
+      mode: {name: "javascript", json: true },
+      keyMap: "sublime",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
       extraKeys: {
         "Cmd-N": function(instance) { handleNewButton() },
         "Ctrl-N": function(instance) { handleNewButton() },

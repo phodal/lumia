@@ -15,7 +15,8 @@
     "min_height": 600
   },
   "dependencies": {
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "zepto": ""
   },
   "webkit": {
     "plugin": true
