@@ -28,6 +28,9 @@ function handleDocumentChange(title) {
     } else if (title.match(/.css$/)) {
       mode = "css";
       modeName = "CSS";
+    }else if (title.match(/.rb$/)) {
+      mode = "ruby";
+      modeName = "Ruby";
     }
   } else {
     document.getElementById("title").innerHTML = "[no document loaded]";
@@ -170,7 +173,7 @@ onload = function() {
         "Ctrl-S": function(instance) { handleSaveButton() },
       }
     });
-
+ 
   newFile();
   onresize();
 
