@@ -7,7 +7,7 @@
   "window": {
     "title": "nw-demo",
     "toolbar": true,
-    "frame": true,
+    "frame": false,
     "width": 800,
     "height": 600,
     "position": "mouse",
@@ -18,7 +18,8 @@
     "underscore": "~1.6.0",
     "jquery"  : "~2.1.0",
     "coffee-script": "~1.7.1",
-    "backbone": "~1.1.2"
+    "backbone": "~1.1.2",
+    "string":"~1.8.0"
   },
   "webkit": {
     "plugin": true
