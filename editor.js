@@ -10,29 +10,9 @@ var fs = require("fs");
 var Backbone = require('backbone');
 var _ = require("underscore");
 var S = require('string');
+var m = require('./allmodes')
 
 var clipboard = gui.Clipboard.get();
-var allmodes = [{
-    filename: ".json",
-    mode: "javascript",
-    modeName: "Javascript(JSON)"
-}, {
-    filename: ".css",
-    mode: "CSS",
-    modeName: "CSS"
-}, {
-    filename: "js",
-    mode: "javascript",
-    modeName: "Javascript"
-}, {
-    filename: ".html",
-    mode: "html",
-    modeName: "HTML"
-}, {
-    filename: ".rb",
-    mode: "ruby",
-    modeName: "Ruby"
-}];
 
 function handleDocumentChange(title) {
     var mode = "javascript";
@@ -41,7 +21,7 @@ function handleDocumentChange(title) {
         title = title.match(/[^/]+$/)[0];
         document.getElementById("title").innerHTML = title;
         document.title = title;
-        _.each(allmodes, function(modes) {
+        _.each(m.allmodes, function(modes) {
             if (S(title).contains(modes["filename"])) {
                 mode = modes["mode"];
                 modeName = modes["modeName"];
