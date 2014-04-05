@@ -181,13 +181,15 @@ onload = function() {
 };
 
 onresize = function() {
-  var container = document.getElementsByTagName('.workspace');
+  var container = document.getElementById('editor');
   var containerWidth = container.offsetWidth;
-  var containerHeight = container.offsetHeight;
+  var containerHeight = container.offsetHeight-30;
+  console.log(containerHeight);
 
   var scrollerElement = editor.getScrollerElement();
   scrollerElement.style.width = containerWidth + 'px';
   scrollerElement.style.height = containerHeight + 'px';
 
   editor.refresh();
+  editor.setSize("100%",containerHeight)
 }

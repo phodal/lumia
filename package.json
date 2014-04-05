@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "underscore": "~1.4.4",
-    "zepto": ""
+    "jquery"  : "~2.1.0"
   },
   "webkit": {
     "plugin": true
