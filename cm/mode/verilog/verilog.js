@@ -1,3 +1,13 @@
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+"use strict";
+
 CodeMirror.defineMode("verilog", function(config, parserConfig) {
   var indentUnit = config.indentUnit,
       keywords = parserConfig.keywords || {},
@@ -21,7 +31,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
       curPunc = ch;
-      return null
+      return null;
     }
     if (/[\d']/.test(ch)) {
       stream.eatWhile(/[\w\.']/);
@@ -48,7 +58,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
       return "keyword";
     }
     if (atoms.propertyIsEnumerable(cur)) return "atom";
-    return "word";
+    return "variable";
   }
 
   function tokenString(quote) {
@@ -146,7 +156,6 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   };
 });
 
-(function() {
   function words(str) {
     var obj = {}, words = str.split(" ");
     for (var i = 0; i < words.length; ++i) obj[words[i]] = true;
@@ -167,21 +176,9 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "endgenerate endmodule endprimitive endspecify endtable endtask for forever function generate if ifnone " +
     "macromodule module primitive repeat specify table task while";
 
-  function metaHook(stream, state) {
+  function metaHook(stream) {
     stream.eatWhile(/[\w\$_]/);
     return "meta";
-  }
-
-  // C#-style strings where "" escapes a quote.
-  function tokenAtString(stream, state) {
-    var next;
-    while ((next = stream.next()) != null) {
-      if (next == '"' && !stream.eat('"')) {
-        state.tokenize = null;
-        break;
-      }
-    }
-    return "string";
   }
 
   CodeMirror.defineMIME("text/x-verilog", {
@@ -191,4 +188,5 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     atoms: words("null"),
     hooks: {"`": metaHook, "$": metaHook}
   });
-}());
+
+});

@@ -9,10 +9,10 @@
     "toolbar": true,
     "frame": true,
     "width": 800,
-    "height": 500,
+    "height": 600,
     "position": "mouse",
     "min_width": 800,
-    "min_height": 500
+    "min_height": 600
   },
   "dependencies": {
     "underscore": "~1.4.4"

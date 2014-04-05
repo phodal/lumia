@@ -172,9 +172,9 @@ onload = function() {
 };
 
 onresize = function() {
-  var container = document.getElementsByTagName('body')[0];
+  var container = document.getElementsByTagName('.workspace');
   var containerWidth = container.offsetWidth;
-  var containerHeight = container.offsetWidth;
+  var containerHeight = container.offsetHeight;
 
   var scrollerElement = editor.getScrollerElement();
   scrollerElement.style.width = containerWidth + 'px';

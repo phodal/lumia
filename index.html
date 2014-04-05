@@ -2,8 +2,8 @@
 
 <head>
     <title>untitled</title>
-    <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/styles.css">
+    <link rel="stylesheet" href="./assets/normalize.css">
     <script src="lib/zepto.min.js"></script>
     <script src="editor.js"></script>
     <script src="cm/lib/codemirror.js"></script>
@@ -16,35 +16,24 @@
     <link rel="stylesheet" href="cm/theme/lesser-dark.css">
 </head>
 
-<body>
-    <div class="workspace scrollbars-visible-when-scrolling">
+<body style="background:#fff">
+    <div class="workspace" background="#fff">
         <div class="horizontal">
             <div class="vertical">
                 <div class="panes">
-                    <div class="pane active">
+                    <div class="pane" style="min-width:100%;">
                         <ul tabindex="-1" class="list-inline tab-bar inset-panel">
-                            <li class="tab sortable active">
+                            <li class="tab active">
                                 <div class="title" id="title">untitled</div>
                                 <div class="close-icon"></div>
                             </li>
                         </ul>
-                        <div class="item-views">
-                            <div class=" editor-colors soft-wrap" style="min-height:1800px">
-                                <div class="gutter">
-                                    <div class="line-numbers">
-                                    </div>
-                                </div>
-                                <div class="scroll-view">
-                                    <div class="overlayer">
-                                        <div class="cursor idle"></div>
-                                    </div>
-
-                                </div>
-                                <div id="editor"></div>
-                            </div>
+                        <div class="editor">
+                        <div id="editor"></div>
                         </div>
                     </div>
                 </div>
+
                 <div class="status-bar tool-panel panel-bottom">
                     <div class="flexbox-repaint-hack">
                         <div class="status-bar-left">
@@ -62,10 +51,11 @@
             <input style="display:none;" id="openFile" type="file" />
             <input style="display:none;" id="saveFile" type="file" nwsaveas />
         </div>
-        <div style="info">
-            <button id="new">New</button>
-            <button id="open">Open</button>
-            <button id="save">Save</button>
+
+        <div style="display:none">
+            <button style="display:none;" id="new">New</button>
+            <button style="display:none;" id="open">Open</button>
+            <button style="display:none;" id="save">Save</button>
         </div>
 </body>
 

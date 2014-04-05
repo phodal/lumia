@@ -1,4 +1,14 @@
-CodeMirror.defineMode("pascal", function(config) {
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+"use strict";
+
+CodeMirror.defineMode("pascal", function() {
   function words(str) {
     var obj = {}, words = str.split(" ");
     for (var i = 0; i < words.length; ++i) obj[words[i]] = true;
@@ -26,7 +36,7 @@ CodeMirror.defineMode("pascal", function(config) {
       return tokenComment(stream, state);
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
-      return null
+      return null;
     }
     if (/\d/.test(ch)) {
       stream.eatWhile(/[\w\.]/);
@@ -46,7 +56,7 @@ CodeMirror.defineMode("pascal", function(config) {
     var cur = stream.current();
     if (keywords.propertyIsEnumerable(cur)) return "keyword";
     if (atoms.propertyIsEnumerable(cur)) return "atom";
-    return "word";
+    return "variable";
   }
 
   function tokenString(quote) {
@@ -76,7 +86,7 @@ CodeMirror.defineMode("pascal", function(config) {
   // Interface
 
   return {
-    startState: function(basecolumn) {
+    startState: function() {
       return {tokenize: null};
     },
 
@@ -92,3 +102,5 @@ CodeMirror.defineMode("pascal", function(config) {
 });
 
 CodeMirror.defineMIME("text/x-pascal", "pascal");
+
+});

@@ -1,3 +1,13 @@
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+"use strict";
+
 CodeMirror.defineMode("ecl", function(config) {
 
   function words(str) {
@@ -10,17 +20,6 @@ CodeMirror.defineMode("ecl", function(config) {
     if (!state.startOfLine) return false;
     stream.skipToEnd();
     return "meta";
-  }
-
-  function tokenAtString(stream, state) {
-    var next;
-    while ((next = stream.next()) != null) {
-      if (next == '"' && !stream.eat('"')) {
-        state.tokenize = null;
-        break;
-      }
-    }
-    return "string";
   }
 
   var indentUnit = config.indentUnit;
@@ -49,7 +48,7 @@ CodeMirror.defineMode("ecl", function(config) {
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
       curPunc = ch;
-      return null
+      return null;
     }
     if (/\d/.test(ch)) {
       stream.eatWhile(/[\w\.]/);
@@ -86,21 +85,21 @@ CodeMirror.defineMode("ecl", function(config) {
     } else if (builtin.propertyIsEnumerable(cur)) {
       if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
       return "builtin";
-    } else { //Data types are of from KEYWORD## 
-		var i = cur.length - 1;
-		while(i >= 0 && (!isNaN(cur[i]) || cur[i] == '_'))
-			--i;
-		
-		if (i > 0) {
-			var cur2 = cur.substr(0, i + 1);
-	    	if (variable_3.propertyIsEnumerable(cur2)) {
-	      		if (blockKeywords.propertyIsEnumerable(cur2)) curPunc = "newstatement";
-	      		return "variable-3";
-	      	}
-	    }
+    } else { //Data types are of from KEYWORD##
+                var i = cur.length - 1;
+                while(i >= 0 && (!isNaN(cur[i]) || cur[i] == '_'))
+                        --i;
+
+                if (i > 0) {
+                        var cur2 = cur.substr(0, i + 1);
+                if (variable_3.propertyIsEnumerable(cur2)) {
+                        if (blockKeywords.propertyIsEnumerable(cur2)) curPunc = "newstatement";
+                        return "variable-3";
+                }
+            }
     }
     if (atoms.propertyIsEnumerable(cur)) return "atom";
-    return "word";
+    return null;
   }
 
   function tokenString(quote) {
@@ -200,4 +199,6 @@ CodeMirror.defineMode("ecl", function(config) {
   };
 });
 
-CodeMirror.defineMIME("text/x-ecl");
+CodeMirror.defineMIME("text/x-ecl", "ecl");
+
+});
