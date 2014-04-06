@@ -24,7 +24,7 @@ function handleDocumentChange(title) {
             if (S(title).contains(modes["filename"])) {
                 mode = modes["mode"];
                 modeName = modes["modeName"];
-                console.log(mode);
+                console.log(mode.green);
             }
         });
     } else {

@@ -23,8 +23,7 @@
     "coffee-script": "~1.7.1",
     "backbone": "~1.1.2",
     "string": "~1.8.0",
-    "git-utils": "~1.2.2",
-    "colors":"~0.6.2"
+    "git-utils": "~1.2.2"
   },
   "webkit": {
     "plugin": true
@@ -49,5 +48,5 @@
   "bugs": {
     "url": "https://github.com/gmszone/lumia/issues"
   },
-  "homepage": "https://github.com/gmszone/lumia"
+  "homepage": "http://www.phodal.com/"
 }
