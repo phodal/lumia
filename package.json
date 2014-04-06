@@ -23,7 +23,7 @@
     "coffee-script": "~1.7.1",
     "backbone": "~1.1.2",
     "string": "~1.8.0",
-    "git-utils": "~1.2.2"
+    "shelljs": "~0.2.6"
   },
   "webkit": {
     "plugin": true

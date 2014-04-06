@@ -10,8 +10,13 @@ var Backbone = require('backbone');
 var _ = require("underscore");
 var S = require('string');
 var m = require('./allmodes')
-
 var clipboard = gui.Clipboard.get();
+var shell = require('shelljs');
+
+if (!shell.which('git')) {
+  shell.echo('Sorry, this script requires git');
+  exit(1);
+}
 
 function handleDocumentChange(title) {
     var mode = "javascript";
