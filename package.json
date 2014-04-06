@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "lumia",
   "description": "lumia editor for fun",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "lumia",
     "node-webkit"

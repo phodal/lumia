@@ -19,14 +19,14 @@ function handleDocumentChange(title) {
     if (title) {
         title = title.match(/[^/]+$/)[0];
         document.getElementById("title").innerHTML = title;
-        document.title = title;
+        document.title ="Lumia"+title;
         _.each(m.allmodes, function(modes) {
             if (S(title).contains(modes["filename"])) {
                 mode = modes["mode"];
                 modeName = modes["modeName"];
                 console.log(mode);
             }
-        })
+        });
     } else {
         document.getElementById("title").innerHTML = "[no document loaded]";
     }
