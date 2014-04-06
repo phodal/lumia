@@ -17,19 +17,69 @@ global.$ = $;
 var abar = require('./lib/address_bar');
 var folder_view = require('./lib/folder_view');
 var shell = require('nw.gui').Shell;
+var extrakeys = {
+    "Cmd-N": function(instance) {
+        handleNewButton()
+    },
+    "Ctrl-N": function(instance) {
+        handleNewButton()
+    },
+    "Cmd-O": function(instance) {
+        handleOpenButton()
+    },
+    "Ctrl-O": function(instance) {
+        handleOpenButton()
+    },
+    "Cmd-S": function(instance) {
+        handleSaveButton()
+    },
+    "Ctrl-S": function(instance) {
+        handleSaveButton()
+    },
+    "Cmd-Shift-P": function(instance) {
+        console.log("hello")
+    }
+};
 
 $(document).ready(function() {
-  var folder = new folder_view.Folder($('#files'));
+    var folder = new folder_view.Folder($('#files'));
 
-  folder.open(process.cwd());
+    folder.open(process.cwd());
 
-  folder.on('navigate', function(dir, mime) {
-    if (mime.type == 'folder') {
-        console.log("folder")
-    } else {
-      shell.openItem(mime.path);
-    }
-  });
+    folder.on('navigate', function(dir, mime) {
+        if (mime.type == 'folder') {
+            folder.open(mime.path);
+        } else {
+            onChosenFileToOpen(mime.path);
+        }
+    });
+    newButton = document.getElementById("new");
+    openButton = document.getElementById("open");
+    saveButton = document.getElementById("save");
+
+    newButton.addEventListener("click", handleNewButton);
+    openButton.addEventListener("click", handleOpenButton);
+    saveButton.addEventListener("click", handleSaveButton);
+
+    $("#saveFile").change(function(evt) {
+        onChosenFileToSave($(this).val());
+    });
+    $("#openFile").change(function(evt) {
+        onChosenFileToOpen($(this).val());
+    });
+    editor = CodeMirror(
+        document.getElementById("editor"), {
+            lineNumbers: true,
+            keyMap: "sublime",
+            autoCloseBrackets: true,
+            matchBrackets: true,
+            showCursorWhenSelecting: true,
+            extraKeys: extrakeys
+        });
+    newFile();
+    onresize();
+
+    gui.Window.get().show();
 });
 
 
@@ -39,7 +89,7 @@ function handleDocumentChange(title) {
     if (title) {
         title = title.match(/[^/]+$/)[0];
         document.getElementById("title").innerHTML = title;
-        document.title ="Lumia"+title;
+        document.title = "Lumia" + title;
         _.each(m.allmodes, function(modes) {
             if (S(title).contains(modes["filename"])) {
                 mode = modes["mode"];
@@ -88,7 +138,7 @@ function writeEditorToFile(theFileEntry) {
         handleDocumentChange(theFileEntry);
         document.getElementById("filestatus").innerHTML = "Save Completed";
         console.log("Write completed.");
-      
+
     });
 }
 
@@ -126,59 +176,6 @@ function handleSaveButton() {
         $("#saveFile").trigger("click");
     }
 }
-
-onload = function() {
-  
-    newButton = document.getElementById("new");
-    openButton = document.getElementById("open");
-    saveButton = document.getElementById("save");
-
-    newButton.addEventListener("click", handleNewButton);
-    openButton.addEventListener("click", handleOpenButton);
-    saveButton.addEventListener("click", handleSaveButton);
-
-    $("#saveFile").change(function(evt) {
-        onChosenFileToSave($(this).val());
-    });
-    $("#openFile").change(function(evt) {
-        onChosenFileToOpen($(this).val());
-    });    
-    editor = CodeMirror(
-        document.getElementById("editor"), {
-            lineNumbers: true,
-            keyMap: "sublime",
-            autoCloseBrackets: true,
-            matchBrackets: true,
-            showCursorWhenSelecting: true,
-            extraKeys: {
-                "Cmd-N": function(instance) {
-                    handleNewButton()
-                },
-                "Ctrl-N": function(instance) {
-                    handleNewButton()
-                },
-                "Cmd-O": function(instance) {
-                    handleOpenButton()
-                },
-                "Ctrl-O": function(instance) {
-                    handleOpenButton()
-                },
-                "Cmd-S": function(instance) {
-                    handleSaveButton()
-                },
-                "Ctrl-S": function(instance) {
-                    handleSaveButton()
-                },
-                "Cmd-Shift-P": function(instance) {
-                   console.log("hello".green)
-                }
-            }
-        });
-    newFile();
-    onresize();
-
-    gui.Window.get().show();
-};
 
 onresize = function() {
     var container = document.getElementById("editor");
