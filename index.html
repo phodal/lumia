@@ -2,9 +2,10 @@
 
 <head>
     <title>untitled</title>
+
     <link rel="stylesheet" href="./assets/normalize.css">
 
-    <script src="lib/zepto.min.js"></script>
+    <script src="lib/jquery-2.1.0.min.js"></script>
     <script src="editor.js"></script>
 
     <script src="cm/lib/codemirror.js"></script>
@@ -30,7 +31,14 @@
         <div class="horizontal">
             <div class="vertical">
                 <div class="panes">
-                    <div class="pane" style="min-width:100%;">
+                    <div class="tree-view-resizer tool-panel panel-left" style="width: 200px;">
+                        <div class="tree-view-scroller">
+                            <ol class="tree-view full-menu list-tree has-collapsable-children focusable-panel" tabindex="-1">
+                            </ol>
+                        </div>
+                        <div class="tree-view-resize-handle"></div>
+                    </div>
+                    <div class="pane">
                         <ul tabindex="-1" class="list-inline tab-bar inset-panel">
                             <li class="tab active">
                                 <div class="title" id="title">untitled</div>
@@ -38,7 +46,7 @@
                             </li>
                         </ul>
                         <div class="editor">
-                        <div id="editor"></div>
+                            <div id="editor"></div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +55,7 @@
                     <div class="flexbox-repaint-hack">
                         <div class="status-bar-left">
                             <div class="cursor-position inline-block">
-                            	<span id="mode"></span>
+                                <span id="mode"></span>
                                 <span id="filestatus"></span>
                             </div>
                         </div>

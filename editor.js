@@ -11,16 +11,13 @@ var _ = require("underscore");
 var S = require('string');
 var m = require('./allmodes')
 var clipboard = gui.Clipboard.get();
-var shell = require('shelljs');
 
-if (!shell.which('git')) {
-  shell.echo('Sorry, this script requires git');
-  exit(1);
-}
+global.$ = $;
+
 
 function handleDocumentChange(title) {
-    var mode = "javascript";
-    var modeName = "JavaScript";
+    var mode = "python";
+    var modeName = "Happy Hacking";
     if (title) {
         title = title.match(/[^/]+$/)[0];
         document.getElementById("title").innerHTML = title;
