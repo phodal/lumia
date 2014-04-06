@@ -14,6 +14,24 @@ var clipboard = gui.Clipboard.get();
 
 global.$ = $;
 
+var abar = require('./lib/address_bar');
+var folder_view = require('./lib/folder_view');
+var shell = require('nw.gui').Shell;
+
+$(document).ready(function() {
+  var folder = new folder_view.Folder($('#files'));
+
+  folder.open(process.cwd());
+
+  folder.on('navigate', function(dir, mime) {
+    if (mime.type == 'folder') {
+        console.log("folder")
+    } else {
+      shell.openItem(mime.path);
+    }
+  });
+});
+
 
 function handleDocumentChange(title) {
     var mode = "python";

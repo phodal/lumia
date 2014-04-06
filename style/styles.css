@@ -469,3 +469,7 @@ font-family: sans-serif;
 #filestatus{
  	color:#0098ff; 
 }
+
+#files {
+    font-size: 11px;
+}

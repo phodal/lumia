@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="cm/theme/lesser-dark.css">
     <link rel="stylesheet" href="cm/lib/codemirror.css">
     <link rel="stylesheet" href="./style/styles.css">
-
+    <script>
+    require('coffee-script');
+    require('./coffee/app.coffee');
+    </script>
 </head>
 
 <body style="background:#fff">
@@ -31,47 +34,46 @@
         <div class="horizontal">
             <div class="vertical">
                 <div class="panes">
-                    <div class="tree-view-resizer tool-panel panel-left" style="width: 200px;">
+                    <div class="tree-view-resizer tool-panel panel-left" style="width: 140px;">
                         <div class="tree-view-scroller">
-                            <ol class="tree-view full-menu list-tree has-collapsable-children focusable-panel" tabindex="-1">
-                            </ol>
+
+                            <ul id="files"></ul>
                         </div>
-                        <div class="tree-view-resize-handle"></div>
                     </div>
-                    <div class="pane">
-                        <ul tabindex="-1" class="list-inline tab-bar inset-panel">
-                            <li class="tab active">
-                                <div class="title" id="title">untitled</div>
-                                <div class="close-icon"></div>
-                            </li>
-                        </ul>
-                        <div class="editor">
-                            <div id="editor"></div>
-                        </div>
+                <div class="pane">
+                    <ul tabindex="-1" class="list-inline tab-bar inset-panel">
+                        <li class="tab active">
+                            <div class="title" id="title">untitled</div>
+                            <div class="close-icon"></div>
+                        </li>
+                    </ul>
+                    <div class="editor">
+                        <div id="editor"></div>
                     </div>
                 </div>
+            </div>
 
-                <div class="status-bar tool-panel panel-bottom">
-                    <div class="flexbox-repaint-hack">
-                        <div class="status-bar-left">
-                            <div class="cursor-position inline-block">
-                                <span id="mode"></span>
-                                <span id="filestatus"></span>
-                            </div>
+            <div class="status-bar tool-panel panel-bottom">
+                <div class="flexbox-repaint-hack">
+                    <div class="status-bar-left">
+                        <div class="cursor-position inline-block">
+                            <span id="mode"></span>
+                            <span id="filestatus"></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <input style="display:none;" id="newFile" type="file" />
-            <input style="display:none;" id="openFile" type="file" />
-            <input style="display:none;" id="saveFile" type="file" nwsaveas />
         </div>
+        <input style="display:none;" id="newFile" type="file" />
+        <input style="display:none;" id="openFile" type="file" />
+        <input style="display:none;" id="saveFile" type="file" nwsaveas />
+    </div>
 
-        <div style="display:none">
-            <button style="display:none;" id="new">New</button>
-            <button style="display:none;" id="open">Open</button>
-            <button style="display:none;" id="save">Save</button>
-        </div>
+    <div style="display:none">
+        <button style="display:none;" id="new">New</button>
+        <button style="display:none;" id="open">Open</button>
+        <button style="display:none;" id="save">Save</button>
+    </div>
 </body>
 
 </html>
