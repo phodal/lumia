@@ -473,3 +473,8 @@ font-family: sans-serif;
 #files {
     font-size: 11px;
 }
+#markdown-preview{
+    overflow: scroll;
+    height:100%;
+    width:100%;
+}

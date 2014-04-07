@@ -12,6 +12,8 @@ var S = require('string');
 var m = require('./allmodes')
 var clipboard = gui.Clipboard.get();
 
+var markdown = require("markdown").markdown;
+
 global.$ = $;
 
 var abar = require('./lib/address_bar');
@@ -36,8 +38,8 @@ var extrakeys = {
     "Ctrl-S": function(instance) {
         handleSaveButton()
     },
-    "Cmd-Shift-P": function(instance) {
-        console.log("hello")
+    "Cmd-Ctrl-P": function(instance) {
+        previewMarkdown(fileEntry);
     }
 };
 
@@ -89,7 +91,7 @@ function handleDocumentChange(title) {
     if (title) {
         title = title.match(/[^/]+$/)[0];
         document.getElementById("title").innerHTML = title;
-        document.title = "Lumia" + title;
+        document.title = title + "    Lumia";
         _.each(m.allmodes, function(modes) {
             if (S(title).contains(modes["filename"])) {
                 mode = modes["mode"];
@@ -101,6 +103,10 @@ function handleDocumentChange(title) {
         document.getElementById("title").innerHTML = "[no document loaded]";
     }
     editor.setOption("mode", mode);
+    if (mode == "markdown") {
+        $("#markdown").after("<div class='pane'><ul tabindex='-1' class='list-inline tab-bar inset-panel'><li class='tab active'><div class='title' id='title'>untitled</div><div class='close-icon'></div></li></ul><div id='markdown-preview'></div></div>");
+        previewMarkdown(fileEntry);
+    }
     document.getElementById("mode").innerHTML = modeName;
 }
 
@@ -124,6 +130,16 @@ function readFileIntoEditor(theFileEntry) {
         handleDocumentChange(theFileEntry);
         editor.setValue(String(data));
         fileEntry = theFileEntry;
+    });
+}
+
+function previewMarkdown(theFileEntry) {
+    fs.readFile(theFileEntry, function(err, data) {
+        if (err) {
+            console.log("Read failed: " + err);
+        }
+        $("#markdown-preview").append(markdown.toHTML(String(data)));
+        console.log(markdown.toHTML(String(data)));
     });
 }
 
