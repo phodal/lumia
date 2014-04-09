@@ -16,3 +16,6 @@
 ``source ~/.bash_profile``
 
     nw app.nw
+
+
+![Lumia Editor](https://raw.github.com/gmszone/lumia/master/assets/lumia.jpg)
