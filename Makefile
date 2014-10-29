@@ -1,4 +1,4 @@
-nw = /Applications/node-webkit/node-webkit.app/Contents/MacOS/node-webkit
+nw = /Applications/node-webkit.app/Contents/MacOS/node-webkit
 
 default:
 	zip -r app.nw * -x ".git/*"
